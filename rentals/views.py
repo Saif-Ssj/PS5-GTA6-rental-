@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render
 from .forms import ContactForm
 from .models import Booking
 from .pricing import MAX_DAYS, estimate_price
-
+from .whatsapp import customer_to_owner_link
 
 def home(request):
     return render(request, "rentals/home.html")
@@ -101,7 +101,7 @@ def book_details(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
-            Booking.objects.create(
+            booking = Booking.objects.create(
                 name=form.cleaned_data["name"],
                 phone=form.cleaned_data["phone"],
                 residence=form.cleaned_data["residence"],
@@ -111,6 +111,7 @@ def book_details(request):
                 extra_screen=selection["screen"],
                 total_price=selection["price"],
             )
+            request.session["last_booking_id"] = booking.id
             return redirect("book_sent")
     else:
         form = ContactForm()
@@ -119,4 +120,11 @@ def book_details(request):
 
 
 def book_sent(request):
-    return render(request, "rentals/book_sent.html")
+    booking_id = request.session.get("last_booking_id")
+    booking = Booking.objects.filter(id=booking_id).first() if booking_id else None
+
+    context = {"booking": booking}
+    if booking:
+        context["whatsapp_url"] = customer_to_owner_link(booking)
+
+    return render(request, "rentals/book_sent.html", context)
