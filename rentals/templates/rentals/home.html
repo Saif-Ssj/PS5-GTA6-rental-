@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html class="dark" lang="en">
 <head>
@@ -403,13 +404,11 @@
           </h2>
 
           <!-- 3D DROPZONE: IMPLEMENT YOUR 3D SCENE HERE -->
-          <div id="custom-3d-viewport" class="w-full h-72 rounded-2xl relative border border-dashed border-purple-500/40 bg-purple-950/20 flex flex-col items-center justify-center p-4 text-center overflow-hidden">
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.15)_0,transparent_70%)] pointer-events-none"></div>
-            <span class="material-symbols-outlined text-purple-400 text-4xl mb-2 animate-bounce">view_in_ar</span>
-            <div class="font-display text-white text-base tracking-wider uppercase">YOUR 3D HARDWARE CANVAS HERE</div>
-            <div class="font-mono text-[11px] text-purple-300 mt-1 max-w-xs">
-              Inject your custom Three.js canvas or 3D WebGL renderer inside <code class="text-[#00eefc]">#custom-3d-viewport</code>.
-            </div>
+          <div id="custom-3d-viewport"
+             class="relative w-full h-72 rounded-2xl overflow-hidden border border-purple-500/30 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.25)_0,transparent_70%)]"
+             data-ps5="{% static 'rentals/models/ps5.glb' %}"
+              data-controller="{% static 'rentals/models/controller.glb' %}"
+              data-gta="{% static 'rentals/models/gta6.glb' %}">
           </div>
 
           <!-- PERIPHERAL SELECTION LIST -->
@@ -623,6 +622,15 @@
       }
     }
   </script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="{% static 'rentals/scene.js' %}"></script>
 
 </body>
 </html>
