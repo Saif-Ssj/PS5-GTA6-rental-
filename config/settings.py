@@ -132,3 +132,4 @@ MAILERS = {
 }
 # ---------- WhatsApp ----------
 OWNER_WHATSAPP = os.environ.get("OWNER_WHATSAPP", "")
+CALLMEBOT_APIKEY = os.environ.get("CALLMEBOT_APIKEY","")
