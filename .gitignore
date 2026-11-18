@@ -1,18 +1,17 @@
-# Python toolbox and temporary files
+
 venv/
 __pycache__/
 *.pyc
 
-# Local database (test data)
+
 db.sqlite3
 
-# Secrets (API keys, passwords)
+
 .env
 .env.*
 !.env.example
 
-# Mac system files
 .DS_Store
 
-# VS Code settings
 .vscode/
+staticfiles/
