@@ -19,8 +19,10 @@ from django.urls import path
 from rentals import views 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("", views.home, name = "home"), 
+    path("admin/", admin.site.urls),
+    path("", views.home, name="home"),
     path("book/", views.book, name="book"),
+    path("book/details/", views.book_details, name="book_details"),
+    path("book/sent/", views.book_sent, name="book_sent"),
     path("api/price/", views.price_api, name="price_api"),
 ]

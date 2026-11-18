@@ -1,0 +1,16 @@
+{% extends "rentals/base.html" %}
+
+{% block content %}
+<div class="mt-16 text-center flex flex-col items-center gap-4">
+  <span class="material-symbols-outlined text-6xl text-emerald-400">check_circle</span>
+  <h1 class="font-display text-3xl uppercase text-white">Request sent!</h1>
+  <p class="font-body text-sm text-neutral-300 leading-relaxed">
+    Your order is <span class="text-amber-300 font-bold">pending</span>. The admin has been contacted.<br>
+    You'll get a WhatsApp message as soon as it's approved.
+  </p>
+
+  <!-- Part 6: the "Open WhatsApp" button goes here -->
+
+  <a href="{% url 'home' %}" class="mt-4 px-6 py-3 rounded-xl bg-[#2d273c] text-[#00eefc] font-display uppercase tracking-wider">Back home</a>
+</div>
+{% endblock %}
