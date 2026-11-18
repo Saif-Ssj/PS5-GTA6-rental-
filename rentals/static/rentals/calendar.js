@@ -191,11 +191,14 @@ async function updateSummary() {
   const datesEl = document.getElementById("selected-dates");
   const daysEl = document.getElementById("selected-days");
   const priceEl = document.getElementById("price");
+  const continueWrap = document.getElementById("continue-wrap");     // NEW
+  const continueBtn = document.getElementById("continue-btn");       // NEW
 
   if (!startKey || !endKey) {
     datesEl.textContent = startKey ? `${startKey} → pick an end date` : "Pick a start date";
     daysEl.textContent = "–";
     priceEl.textContent = "–";
+    continueWrap.classList.add("hidden");                            // NEW
     return;
   }
 
@@ -206,11 +209,16 @@ async function updateSummary() {
   const controller = document.getElementById("extra-controller").checked ? 1 : 0;
   const screen = document.getElementById("extra-screen").checked ? 1 : 0;
 
+  // Build the link to the details page and show the button        // NEW
+  continueBtn.href = `/book/details/?start=${startKey}&end=${endKey}&controller=${controller}&screen=${screen}`; // NEW
+  continueWrap.classList.remove("hidden");                          // NEW
+
   priceEl.textContent = "…";
   const response = await fetch(`/api/price/?days=${days}&controller=${controller}&screen=${screen}`);
   const data = await response.json();
   priceEl.textContent = response.ok ? `${data.price} €` : "Error";
 }
+
 
 document.getElementById("extra-controller").onchange = updateSummary;
 document.getElementById("extra-screen").onchange = updateSummary;
