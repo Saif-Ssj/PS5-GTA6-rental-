@@ -503,42 +503,12 @@
           </div>
 
           <!-- BOOKING FORM -->
-          <form id="heist-reservation-form" onsubmit="event.preventDefault(); submitReservation();" class="p-3.5 rounded-xl bg-[#221c31] border border-purple-500/20 flex flex-col gap-3 font-mono text-xs">
-            <div class="flex items-center justify-between pb-1 border-b border-purple-500/20">
-              <span class="font-display text-sm text-white uppercase tracking-wider">COURIER DISPATCH BOOKING</span>
-              <span class="text-[10px] text-[#00eefc]">PAY ON ARRIVAL</span>
-            </div>
-
-            <div class="flex flex-col gap-1">
-              <label for="gamertag-input" class="text-[10px] text-neutral-400 uppercase">GAMER TAG / OPERATOR ALIAS</label>
-              <input type="text" id="gamertag-input" required placeholder="e.g. Tommy_Vercetti_86" class="w-full px-3 py-2 rounded-lg bg-[#110b1f] text-white border border-purple-500/20 outline-none focus:border-[#00eefc]">
-            </div>
-
-            <div class="flex flex-col gap-1">
-              <label for="city-select" class="text-[10px] text-neutral-400 uppercase">DELIVERY DROP-OFF ZONE</label>
-              <select id="city-select" class="w-full px-3 py-2 rounded-lg bg-[#110b1f] text-white border border-purple-500/20 outline-none focus:border-[#00eefc]">
-                <option value="Vice City - Ocean Beach">VICE CITY — Ocean Beach</option>
-                <option value="Vice City - Starfish Island">VICE CITY — Starfish Island</option>
-                <option value="Los Santos - Vinewood">LOS SANTOS — Vinewood Hills</option>
-                <option value="Los Santos - Ganton">LOS SANTOS — Ganton / South Central</option>
-              </select>
-            </div>
-
-            <div class="flex flex-col gap-1">
-              <div class="flex justify-between items-center text-[10px]">
-                <label for="rental-days" class="text-neutral-400 uppercase">DURATION</label>
-                <span id="rental-days-label" class="text-[#00eefc] font-bold">3 DAYS</span>
-              </div>
-              <input type="range" id="rental-days" min="1" max="30" value="3" oninput="document.getElementById('rental-days-label').innerText = this.value + ' DAYS'" class="w-full accent-cyan-400">
-            </div>
-
-            <button type="submit" id="reserve-btn" class="w-full mt-1 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-display text-sm uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-[0_0_20px_rgba(168,85,247,0.6)] transition">
-              <span>CONFIRM HEIST &amp; RESERVE NOW</span>
-              <span class="material-symbols-outlined text-[18px]">bolt</span>
-            </button>
-          </form>
-
-        </div>
+          <!-- BOOKING BUTTON -->
+        <a href="{% url 'book' %}" class="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-display text-sm uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-[0_0_20px_rgba(168,85,247,0.6)] transition">
+          <span>Check available dates</span>
+          <span class="material-symbols-outlined text-[18px]">calendar_month</span>
+        </a>
+    </div>
       </section>
 
     </div>
