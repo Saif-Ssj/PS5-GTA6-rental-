@@ -1,6 +1,7 @@
 
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 const container = document.getElementById("custom-3d-viewport");
 
@@ -13,6 +14,14 @@ camera.position.set(0, 0.3, 6);
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 container.appendChild(renderer.domElement);
+// ---------- Mouse / touch controls ----------
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;            // smooth, slightly floaty movement
+controls.enablePan = false;               // no sliding the scene sideways
+controls.minDistance = 3;                 // closest zoom
+controls.maxDistance = 10;                // furthest zoom
+controls.minPolarAngle = Math.PI / 4;     // can't go too far above
+controls.maxPolarAngle = Math.PI / 1.7;   // can't go under the floor
 
 // ---------- 2. Lights (neon vibe) ----------
 scene.add(new THREE.AmbientLight(0xffffff, 0.6));
@@ -87,6 +96,6 @@ renderer.setAnimationLoop(() => {
     f.group.rotation.y = t * f.spin;                                    // spin
     f.group.position.y = f.baseY + Math.sin(t * 1.5 + f.offset) * 0.15; // float
   }
-
+  controls.update();
   renderer.render(scene, camera);
 });
