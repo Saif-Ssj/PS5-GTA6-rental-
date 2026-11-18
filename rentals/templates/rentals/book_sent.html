@@ -9,7 +9,20 @@
     You'll get a WhatsApp message as soon as it's approved.
   </p>
 
-  <!-- Part 6: the "Open WhatsApp" button goes here -->
+  {% if booking %}
+    <div class="w-full mt-2 p-4 rounded-xl bg-[#221c31] border border-purple-500/20 font-mono text-xs text-left flex flex-col gap-1.5">
+      <div class="flex justify-between"><span class="text-neutral-400">BOOKING</span><span class="text-white">#{{ booking.id }}</span></div>
+      <div class="flex justify-between"><span class="text-neutral-400">DATES</span><span class="text-white">{{ booking.start_date|date:"D d M" }} → {{ booking.end_date|date:"D d M" }}</span></div>
+      <div class="flex justify-between"><span class="text-neutral-400">PRICE</span><span class="text-[#00eefc]">{{ booking.total_price }} €</span></div>
+    </div>
+
+    <a href="{{ whatsapp_url }}" target="_blank" rel="noopener"
+       class="w-full mt-2 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-display text-sm uppercase tracking-wider flex items-center justify-center gap-2 transition">
+      <span class="material-symbols-outlined text-[20px]">chat</span>
+      Send my request on WhatsApp
+    </a>
+    <p class="text-[11px] text-neutral-500">Opens WhatsApp with your booking already written. Just press send.</p>
+  {% endif %}
 
   <a href="{% url 'home' %}" class="mt-4 px-6 py-3 rounded-xl bg-[#2d273c] text-[#00eefc] font-display uppercase tracking-wider">Back home</a>
 </div>

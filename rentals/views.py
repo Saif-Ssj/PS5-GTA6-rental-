@@ -1,12 +1,11 @@
 from datetime import date, timedelta
-
+from .whatsapp import customer_to_owner_link, notify_owner
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 
 from .forms import ContactForm
 from .models import Booking
 from .pricing import MAX_DAYS, estimate_price
-from .whatsapp import customer_to_owner_link
 
 def home(request):
     return render(request, "rentals/home.html")
@@ -112,6 +111,7 @@ def book_details(request):
                 total_price=selection["price"],
             )
             request.session["last_booking_id"] = booking.id
+            notify_owner(booking)
             return redirect("book_sent")
     else:
         form = ContactForm()
